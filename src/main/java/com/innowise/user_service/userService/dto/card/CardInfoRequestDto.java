@@ -6,10 +6,11 @@ import jakarta.validation.constraints.Size;
 import lombok.*;
 import org.hibernate.validator.constraints.CreditCardNumber;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 @Data
-public class CardInfoRequestDto {
+public class CardInfoRequestDto implements Serializable {
 
     @NotNull(message = "Card number is required")
     @CreditCardNumber

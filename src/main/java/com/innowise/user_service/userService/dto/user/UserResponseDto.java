@@ -3,12 +3,13 @@ package com.innowise.user_service.userService.dto.user;
 import com.innowise.user_service.userService.dto.card.CardInfoResponseDto;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 @Data
-public class UserResponseDto {
+public class UserResponseDto implements Serializable {
 
     private Long id;
 

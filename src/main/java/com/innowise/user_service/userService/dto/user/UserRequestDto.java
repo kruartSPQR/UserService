@@ -6,11 +6,12 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 
 @Data
-public class UserRequestDto {
+public class UserRequestDto implements Serializable {
 
     @NotBlank(message = "Name is required")
     @Size(max = 255, message = "Name max length is 255")

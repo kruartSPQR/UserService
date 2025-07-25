@@ -7,6 +7,9 @@ import com.innowise.user_service.userService.exception.DuplicateResourceCustomEx
 import com.innowise.user_service.userService.exception.ResourceNotFoundCustomException;
 import com.innowise.user_service.userService.mapper.UserMapper;
 import com.innowise.user_service.userService.repository.UserRepository;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.transaction.annotation.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -21,6 +24,7 @@ public class UserService {
     private final UserRepository userRepository;
     private final UserMapper userMapper;
 
+    @CachePut(value = "users", key = "#id")
     public UserResponseDto createUser(UserRequestDto userRequestDto) {
 
         if (userRepository.existsByEmail(userRequestDto.getEmail())) {
@@ -34,6 +38,7 @@ public class UserService {
         return userMapper.toDTO(userEntity);
     }
     @Transactional(readOnly = true)
+    @Cacheable(value = "users", key = "#id")
     public UserResponseDto getUserById(Long id) {
 
         User user = userRepository.getUserById(id);
@@ -62,6 +67,7 @@ public class UserService {
 
         return userMapper.toDTO(user);
     }
+    @CachePut(value = "users", key = "#id")
     public UserResponseDto updateUser(Long id, UserRequestDto userUpdate) {
 
         User user = userRepository.findById(id)
@@ -81,6 +87,7 @@ public class UserService {
 
          return userMapper.toDTO(user);
     }
+    @CacheEvict(value = "users", key = "#id")
     public void deleteUserById(Long id) {
 
         User user = userRepository.findById(id)
