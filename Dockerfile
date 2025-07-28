@@ -1,4 +1,4 @@
-FROM gradle:jdk23-corretto-al2023 AS builder
+FROM gradle:jdk23-alpine AS builder
 
 WORKDIR /opt/app
 

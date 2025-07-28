@@ -9,6 +9,8 @@ import com.innowise.user_service.userService.exception.ResourceNotFoundCustomExc
 import com.innowise.user_service.userService.mapper.CardInfoMapper;
 import com.innowise.user_service.userService.repository.CardRepository;
 import com.innowise.user_service.userService.repository.UserRepository;
+import org.springframework.cache.Cache;
+import org.springframework.cache.CacheManager;
 import org.springframework.transaction.annotation.Transactional;
 
 import lombok.AllArgsConstructor;
@@ -24,6 +26,7 @@ public class CardService {
     private final CardRepository cardRepository;
     private final UserRepository userRepository;
     private final CardInfoMapper cardInfoMapper;
+    private final CacheManager cacheManager;
 
     public CardInfoResponseDto createCard(CardInfoRequestDto cardInfoRequestDto) {
 
@@ -40,9 +43,9 @@ public class CardService {
         cardInfoEntity.setHolder((user.getName() + " " + user.getSurname()).toUpperCase());
 
         user.getCardList().add(cardInfoEntity);
-
+//        userRepository.save(user);
         cardRepository.save(cardInfoEntity);
-
+        evictUserCache(user.getId());
         return cardInfoMapper.toDto(cardInfoEntity);
     }
 
@@ -87,6 +90,15 @@ public class CardService {
         User user = card.getUser();
         if (user != null) {
             user.getCardList().remove(card);
+//            userRepository.save(user);
+            evictUserCache(user.getId());
+        }
+
+    }
+    private void evictUserCache(Long userId) {
+        Cache cache = cacheManager.getCache("users");
+        if (cache != null) {
+            cache.evict(userId);
         }
     }
 }
