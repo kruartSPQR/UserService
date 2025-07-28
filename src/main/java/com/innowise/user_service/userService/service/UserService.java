@@ -24,7 +24,7 @@ public class UserService {
     private final UserRepository userRepository;
     private final UserMapper userMapper;
 
-    @CachePut(value = "users", key = "#id")
+    @CachePut(value = "users", key = "#result.id")
     public UserResponseDto createUser(UserRequestDto userRequestDto) {
 
         if (userRepository.existsByEmail(userRequestDto.getEmail())) {
