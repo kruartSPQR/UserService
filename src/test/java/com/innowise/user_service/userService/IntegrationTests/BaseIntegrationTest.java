@@ -47,11 +47,9 @@ public abstract class BaseIntegrationTest {
     }
     @AfterEach
     void cleanUp() {
-        // Очистка БД
         jdbcTemplate.execute("DELETE FROM card_info");
         jdbcTemplate.execute("DELETE FROM users");
 
-        // Очистка кэша Redis
         cacheManager.getCacheNames()
                 .forEach(cacheName -> Objects.requireNonNull(cacheManager.getCache(cacheName)).clear());
     }

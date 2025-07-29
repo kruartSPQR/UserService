@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
+import org.springframework.test.annotation.DirtiesContext;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -33,6 +34,7 @@ class UserServiceIntegrationTest extends BaseIntegrationTest {
     }
 
     @Test
+    @DirtiesContext
     void shouldCreateUser() {
         UserRequestDto request = createTestUserDto();
         UserResponseDto response = userService.createUser(request);
@@ -48,6 +50,7 @@ class UserServiceIntegrationTest extends BaseIntegrationTest {
     }
 
     @Test
+    @DirtiesContext
     void shouldUpdateUser() {
         UserResponseDto created = userService.createUser(createTestUserDto());
 
@@ -62,6 +65,7 @@ class UserServiceIntegrationTest extends BaseIntegrationTest {
     }
 
     @Test
+    @DirtiesContext
     void shouldDeleteUser() {
         UserResponseDto created = userService.createUser(createTestUserDto());
         userService.deleteUserById(created.getId());
@@ -71,6 +75,7 @@ class UserServiceIntegrationTest extends BaseIntegrationTest {
     }
 
     @Test
+    @DirtiesContext
     void shouldGetUsers() {
         UserRequestDto user1 = createTestUserDto();
         user1.setEmail("user1@example.com");
@@ -89,6 +94,7 @@ class UserServiceIntegrationTest extends BaseIntegrationTest {
     }
 
     @Test
+    @DirtiesContext
     void shouldPreventDuplicateEmailWhenCreatingNewUser() {
         userService.createUser(createTestUserDto());
 
@@ -97,6 +103,7 @@ class UserServiceIntegrationTest extends BaseIntegrationTest {
     }
 
     @Test
+    @DirtiesContext
     void shouldPreventDuplicateEmailWHileUserUpdating() {
         UserResponseDto user1 = userService.createUser(createTestUserDto());
 
@@ -112,6 +119,7 @@ class UserServiceIntegrationTest extends BaseIntegrationTest {
     }
 
     @Test
+    @DirtiesContext
     void shouldCachingUserData() {
         UserResponseDto created = userService.createUser(createTestUserDto());
 
@@ -129,6 +137,7 @@ class UserServiceIntegrationTest extends BaseIntegrationTest {
     }
 
     @Test
+    @DirtiesContext
     void shouldEvictCacheWhenDelete() {
         UserResponseDto created = userService.createUser(createTestUserDto());
         userService.getUserById(created.getId());

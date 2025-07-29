@@ -10,6 +10,7 @@ import com.innowise.user_service.userService.service.CardService;
 import com.innowise.user_service.userService.service.UserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.DirtiesContext;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -42,6 +43,7 @@ class CardServiceIntegrationTest extends BaseIntegrationTest {
     }
 
     @Test
+    @DirtiesContext
     void shouldCreateCard() {
         UserResponseDto user = createTestUser();
 
@@ -57,6 +59,7 @@ class CardServiceIntegrationTest extends BaseIntegrationTest {
     }
 
     @Test
+    @DirtiesContext
     void shouldUpdateCard() {
         UserResponseDto user = createTestUser();
         CardInfoResponseDto card = cardService.createCard(createTestCardDto(user.getId()));
@@ -70,6 +73,7 @@ class CardServiceIntegrationTest extends BaseIntegrationTest {
     }
 
     @Test
+    @DirtiesContext
     void shouldDeleteCard() {
         UserResponseDto user = createTestUser();
         CardInfoResponseDto card = cardService.createCard(createTestCardDto(user.getId()));
@@ -103,6 +107,7 @@ class CardServiceIntegrationTest extends BaseIntegrationTest {
     }
 
     @Test
+    @DirtiesContext
     void shouldPreventDuplicateCardNumber() {
         UserResponseDto user = createTestUser();
         cardService.createCard(createTestCardDto(user.getId()));
@@ -112,6 +117,7 @@ class CardServiceIntegrationTest extends BaseIntegrationTest {
     }
 
     @Test
+    @DirtiesContext
     void shouldGiveExceptionWhenUserNotFound() {
         CardInfoRequestDto cardRequest = createTestCardDto(999L);
 
@@ -120,6 +126,7 @@ class CardServiceIntegrationTest extends BaseIntegrationTest {
     }
 
     @Test
+    @DirtiesContext
     void shouldRemoveCardFromUserWhenDeleted() {
         UserResponseDto user = createTestUser();
         CardInfoRequestDto tempCard = createTestCardDto(user.getId());
@@ -135,6 +142,7 @@ class CardServiceIntegrationTest extends BaseIntegrationTest {
     }
 
     @Test
+    @DirtiesContext
     void shouldGenerateCorrectCardHolder() {
         UserResponseDto user = createTestUser();
         CardInfoResponseDto card = cardService.createCard(createTestCardDto(user.getId()));
