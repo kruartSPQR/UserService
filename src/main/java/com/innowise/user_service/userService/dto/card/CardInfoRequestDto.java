@@ -3,7 +3,7 @@ package com.innowise.user_service.userService.dto.card;
 import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import lombok.*;
+import lombok.Data;
 import org.hibernate.validator.constraints.CreditCardNumber;
 
 import java.io.Serializable;
