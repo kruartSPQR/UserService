@@ -95,4 +95,13 @@ public class UserService {
                 .orElseThrow(() -> new ResourceNotFoundCustomException("User with id: " + id + " not found"));
         userRepository.delete(user);
     }
+    @CacheEvict(value = "users", key = "#email")
+    public void deleteUserByEmail(String email) {
+
+        User user = userRepository.findByEmail(email);
+              if (user == null) {
+                  throw new ResourceNotFoundCustomException("User with email: " + email + " not found");
+              }
+        userRepository.delete(user);
+    }
 }
