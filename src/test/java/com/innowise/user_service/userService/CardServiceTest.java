@@ -15,6 +15,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.cache.Cache;
+import org.springframework.cache.CacheManager;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -32,6 +34,12 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class CardServiceTest {
+
+    @Mock
+    private CacheManager cacheManager;
+
+    @Mock
+    private Cache cache;
 
     @Mock
     private CardRepository cardRepository;
