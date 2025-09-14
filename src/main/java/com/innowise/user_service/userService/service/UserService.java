@@ -1,10 +1,10 @@
 package com.innowise.user_service.userService.service;
 
+import com.innowise.common.exception.DuplicateResourceCustomException;
+import com.innowise.common.exception.ResourceNotFoundCustomException;
 import com.innowise.user_service.userService.dto.user.UserResponseDto;
 import com.innowise.user_service.userService.dto.user.UserRequestDto;
 import com.innowise.user_service.userService.entity.User;
-import com.innowise.user_service.userService.exception.DuplicateResourceCustomException;
-import com.innowise.user_service.userService.exception.ResourceNotFoundCustomException;
 import com.innowise.user_service.userService.mapper.UserMapper;
 import com.innowise.user_service.userService.repository.UserRepository;
 import org.springframework.cache.annotation.CacheEvict;

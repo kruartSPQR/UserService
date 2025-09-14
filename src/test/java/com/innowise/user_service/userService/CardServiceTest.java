@@ -1,10 +1,10 @@
 package com.innowise.user_service.userService;
 
+import com.innowise.common.exception.DuplicateResourceCustomException;
 import com.innowise.user_service.userService.dto.card.CardInfoRequestDto;
 import com.innowise.user_service.userService.dto.card.CardInfoResponseDto;
 import com.innowise.user_service.userService.entity.CardInfo;
 import com.innowise.user_service.userService.entity.User;
-import com.innowise.user_service.userService.exception.DuplicateResourceCustomException;
 import com.innowise.user_service.userService.mapper.CardInfoMapper;
 import com.innowise.user_service.userService.repository.CardRepository;
 import com.innowise.user_service.userService.repository.UserRepository;
