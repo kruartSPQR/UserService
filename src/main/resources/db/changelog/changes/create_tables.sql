@@ -3,10 +3,10 @@
 --changeset admin:1
 CREATE TABLE users (
         user_id SERIAL PRIMARY KEY,
-        name VARCHAR(255) NOT NULL,
-        surname VARCHAR(255) NOT NULL,
+        name VARCHAR(255) ,
+        surname VARCHAR(255),
         email VARCHAR(255) UNIQUE NOT NULL,
-        birth_date DATE NOT NULL CHECK (birth_date <= CURRENT_DATE)
+        birth_date DATE CHECK (birth_date <= CURRENT_DATE)
 
 );
 --rollback DROP TABLE users;

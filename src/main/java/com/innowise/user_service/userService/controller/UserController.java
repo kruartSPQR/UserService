@@ -58,4 +58,10 @@ public class UserController {
     public void deleteUser(@PathVariable Long id) {
         userService.deleteUserById(id);
     }
+
+    @DeleteMapping("/email/{email}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteUserByEmail(@PathVariable String email) {
+        userService.deleteUserByEmail(email);
+    }
 }

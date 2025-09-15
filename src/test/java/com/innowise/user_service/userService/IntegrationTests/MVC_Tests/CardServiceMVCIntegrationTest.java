@@ -59,7 +59,7 @@ public class CardServiceMVCIntegrationTest{
 Mockito.when(cardService.createCard(getTestCardRequestDto()))
       .thenReturn(getTestCardResponseDtos().get(0));
 
-        mockMvc.perform(post("/api/v1/cards")
+        mockMvc.perform(post("/api/v1/users/cards")
                 .content(objectMapper.writeValueAsString(getTestCardRequestDto()))
                         .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
@@ -69,7 +69,7 @@ Mockito.when(cardService.createCard(getTestCardRequestDto()))
     void shouldUpdateCard()  throws Exception {
 
         Mockito.when(cardService.updateCardById(1L, getTestCardRequestDto())).thenReturn(getTestCardResponseDtos().get(1));
-        mockMvc.perform(put("/api/v1/cards/{id}", 1L)
+        mockMvc.perform(put("/api/v1/users/cards/{id}", 1L)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(getTestCardRequestDto())))
                 .andDo(print())
@@ -81,14 +81,14 @@ Mockito.when(cardService.createCard(getTestCardRequestDto()))
     @Test
     void shouldDeleteCard()  throws Exception {
         Mockito.when(cardService.getCardById(1L)).thenReturn(null);
-        mockMvc.perform(delete("/api/v1/cards/{id}", 1L))
+        mockMvc.perform(delete("/api/v1/users/cards/{id}", 1L))
                 .andDo(print())
                 .andExpect(status().isNoContent());
     }
     @Test
     void shouldGetCardById()  throws Exception {
         Mockito.when(cardService.getCardById(1L)).thenReturn(getTestCardResponseDtos().get(0));
-        mockMvc.perform(get("/api/v1/cards/{id}", 1L))
+        mockMvc.perform(get("/api/v1/users/cards/{id}", 1L))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
@@ -100,7 +100,7 @@ Mockito.when(cardService.createCard(getTestCardRequestDto()))
         Mockito.when(cardService.getCardsByIds(List.of(1L,2L)))
                 .thenReturn(getTestCardResponseDtos());
 
-        mockMvc.perform(get("/api/v1/cards").param("ids", "1" ,"2"))
+        mockMvc.perform(get("/api/v1/users/cards").param("ids", "1" ,"2"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))

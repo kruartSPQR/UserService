@@ -1,11 +1,11 @@
 package com.innowise.user_service.userService.IntegrationTests;
 
+import com.innowise.common.exception.DuplicateResourceCustomException;
+import com.innowise.common.exception.ResourceNotFoundCustomException;
 import com.innowise.user_service.userService.dto.card.CardInfoRequestDto;
 import com.innowise.user_service.userService.dto.card.CardInfoResponseDto;
 import com.innowise.user_service.userService.dto.user.UserRequestDto;
 import com.innowise.user_service.userService.dto.user.UserResponseDto;
-import com.innowise.user_service.userService.exception.DuplicateResourceCustomException;
-import com.innowise.user_service.userService.exception.ResourceNotFoundCustomException;
 import com.innowise.user_service.userService.service.CardService;
 import com.innowise.user_service.userService.service.UserService;
 import org.junit.jupiter.api.Test;
