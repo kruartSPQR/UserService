@@ -1,7 +1,7 @@
 package com.innowise.user_service.userService.exception.handler;
 
-import com.innowise.user_service.userService.exception.DuplicateResourceCustomException;
-import com.innowise.user_service.userService.exception.ResourceNotFoundCustomException;
+import com.innowise.common.exception.DuplicateResourceCustomException;
+import com.innowise.common.exception.ResourceNotFoundCustomException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;

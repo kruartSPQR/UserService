@@ -1,16 +1,15 @@
 package com.innowise.user_service.userService.service;
 
+import com.innowise.common.exception.DuplicateResourceCustomException;
+import com.innowise.common.exception.ResourceNotFoundCustomException;
 import com.innowise.user_service.userService.dto.user.UserResponseDto;
 import com.innowise.user_service.userService.dto.user.UserRequestDto;
 import com.innowise.user_service.userService.entity.User;
-import com.innowise.user_service.userService.exception.DuplicateResourceCustomException;
-import com.innowise.user_service.userService.exception.ResourceNotFoundCustomException;
 import com.innowise.user_service.userService.mapper.UserMapper;
 import com.innowise.user_service.userService.repository.UserRepository;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.transaction.annotation.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -83,6 +82,7 @@ public class UserService {
 
         user.setName(userUpdate.getName());
         user.setSurname(userUpdate.getSurname());
+        user.setBirthDate(userUpdate.getBirthDate());
 
         userRepository.save(user);
 
@@ -93,6 +93,15 @@ public class UserService {
 
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundCustomException("User with id: " + id + " not found"));
+        userRepository.delete(user);
+    }
+    @CacheEvict(value = "users", key = "#email")
+    public void deleteUserByEmail(String email) {
+
+        User user = userRepository.findByEmail(email);
+              if (user == null) {
+                  throw new ResourceNotFoundCustomException("User with email: " + email + " not found");
+              }
         userRepository.delete(user);
     }
 }
