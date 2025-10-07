@@ -43,6 +43,7 @@ public class User {
 
     @Column(nullable = false, length = 255)
     private String email;
+
     private LocalDate birthDate;
 
     @OneToMany( mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
